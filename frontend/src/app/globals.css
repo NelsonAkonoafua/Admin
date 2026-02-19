@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-poppins: 'Poppins', sans-serif;
+  --font-cormorant: 'Cormorant Garamond', serif;
+  --font-playfair: 'Playfair Display', serif;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-brand-warm-white text-brand-charcoal font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  /* Buttons */
+  .btn-primary {
+    @apply bg-brand-charcoal text-white px-8 py-3 text-sm tracking-widest uppercase font-medium
+    transition-all duration-300 hover:bg-black hover:shadow-lg active:scale-98
+    disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply border border-brand-charcoal text-brand-charcoal px-8 py-3 text-sm tracking-widest uppercase font-medium
+    transition-all duration-300 hover:bg-brand-charcoal hover:text-white
+    disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-ghost {
+    @apply text-brand-charcoal px-4 py-2 text-sm font-medium
+    transition-all duration-200 hover:bg-brand-beige rounded;
+  }
+
+  /* Inputs */
+  .input-field {
+    @apply w-full border border-gray-200 px-4 py-3 text-sm text-brand-charcoal bg-white
+    focus:outline-none focus:border-brand-charcoal transition-colors duration-200
+    placeholder:text-gray-400;
+  }
+
+  .label-field {
+    @apply block text-xs tracking-wider uppercase text-gray-500 mb-2 font-medium;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white shadow-sm hover:shadow-md transition-shadow duration-300;
+  }
+
+  /* Product card */
+  .product-card {
+    @apply group cursor-pointer;
+  }
+
+  .product-card-image {
+    @apply overflow-hidden bg-brand-beige aspect-[3/4] relative;
+  }
+
+  .product-card-image img {
+    @apply w-full h-full object-cover transition-transform duration-700 group-hover:scale-105;
+  }
+
+  /* Section headings */
+  .section-heading {
+    @apply font-display text-3xl md:text-4xl lg:text-5xl font-normal text-brand-charcoal;
+  }
+
+  .section-subheading {
+    @apply text-sm tracking-widest uppercase text-gray-400 font-sans font-medium;
+  }
+
+  /* Logo */
+  .logo-text {
+    @apply font-display italic text-2xl md:text-3xl text-brand-charcoal tracking-tight;
+  }
+
+  /* Divider */
+  .elegant-divider {
+    @apply w-16 h-px bg-brand-charcoal mx-auto;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-block px-2 py-0.5 text-xs tracking-wider uppercase font-medium;
+  }
+
+  .badge-sale {
+    @apply badge bg-red-50 text-red-600;
+  }
+
+  .badge-new {
+    @apply badge bg-brand-beige text-brand-charcoal;
+  }
+
+  .badge-bestseller {
+    @apply badge bg-brand-gold-light text-brand-charcoal;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .active\:scale-98:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Custom scrollbar for product galleries */
+.product-gallery-scroll::-webkit-scrollbar {
+  height: 2px;
+}
+
+.product-gallery-scroll::-webkit-scrollbar-track {
+  background: #f5f0e8;
+}
+
+.product-gallery-scroll::-webkit-scrollbar-thumb {
+  background: #c9a96e;
+}
+
+/* Page transition */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.4s ease;
+}
