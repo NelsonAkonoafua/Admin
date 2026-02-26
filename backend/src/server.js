@@ -93,15 +93,19 @@ app.use('/api/uploads', uploadRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
-const server = app.listen(PORT, () => {
-  console.log(`\n🚀 forAbby API running on port ${PORT} in ${process.env.NODE_ENV} mode`);
-});
+// Only bind a TCP port when the file is run directly (e.g. `node server.js`).
+// When imported by the Vercel serverless function (api/index.js) we just
+// export the Express app and let the platform handle the HTTP layer.
+if (require.main === module) {
+  const PORT = process.env.PORT || 5000;
+  const server = app.listen(PORT, () => {
+    console.log(`\n🚀 forAbby API running on port ${PORT} in ${process.env.NODE_ENV} mode`);
+  });
 
-// Handle unhandled promise rejections
-process.on('unhandledRejection', (err) => {
-  console.error('Unhandled Rejection:', err.message);
-  server.close(() => process.exit(1));
-});
+  process.on('unhandledRejection', (err) => {
+    console.error('Unhandled Rejection:', err.message);
+    server.close(() => process.exit(1));
+  });
+}
 
 module.exports = app;
