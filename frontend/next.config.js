@@ -10,7 +10,20 @@ const nextConfig = {
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
-  }
+  },
+  async rewrites() {
+    // In local development, proxy /api/* to the Express backend running on port 5000.
+    // On Vercel, /api/* is handled by the serverless function so no proxy is needed.
+    if (process.env.NODE_ENV === 'development') {
+      return [
+        {
+          source: '/api/:path*',
+          destination: 'http://localhost:5000/api/:path*',
+        },
+      ];
+    }
+    return [];
+  },
 };
 
 module.exports = nextConfig;

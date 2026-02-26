@@ -1,6 +1,14 @@
 {
-  "installCommand": "cd frontend && npm install",
-  "buildCommand": "cd frontend && npm run build",
+  "buildCommand": "cd frontend && npm install && npm run build",
   "outputDirectory": "frontend/.next",
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "functions": {
+    "api/index.js": {
+      "memory": 1024,
+      "maxDuration": 30
+    }
+  },
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "/api/index" }
+  ]
 }
